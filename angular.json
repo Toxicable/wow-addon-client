@@ -84,6 +84,7 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
+            "progress": false,
             "browserTarget": "angular-electron:build"
           },
           "configurations": {

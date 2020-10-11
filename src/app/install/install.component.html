@@ -1,8 +1,17 @@
-<label>
-    GitHub Repository Name: 
-    <input type="text" [formControl]="urlControl">
-</label>
-<br />
-<button (click)="install()" >Install!</button>
+<h2>Repositories</h2>
 
-Progress: 
+<div *ngFor="let repo of repos$ | async">
+    {{repo.repo.repo}} - ({{repo.versions.length}} versions avilable) - <button (click)="installLatest(repo.repo)" >Install Latest!</button>
+    <br />
+</div>
+
+<h2>Add New GitHub Repository</h2>
+<form [formGroup]="gitHubRepository">
+    GitHub Owner: 
+    <input type="text" formControlName="owner">
+    <br />
+    GitHub Repository: 
+    <input type="text" formControlName="repo">
+</form>
+<br />
+<button (click)="createRepo()" >Create!</button>

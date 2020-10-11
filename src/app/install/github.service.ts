@@ -1,5 +1,9 @@
 import {Injectable} from '@angular/core';
 import * as axios from 'axios';
+import * as pathType from 'path';
+import{ GitHubRepository} from './github-repository.service';
+
+const path = window.require('path') as typeof pathType;
 
 export interface GitHubAsset {
     id: number;
@@ -21,18 +25,21 @@ export interface GitHubRelease {
 
 @Injectable({providedIn: 'root'})
 export class GitHubService {
-    async getReleases(repository: string): Promise<GitHubRelease[]> {
-        const response = await axios.default({method: 'GET', url: `https://api.github.com/repos/${repository}/releases`});
+    resolveGitHubRepositoryUrl(repository: GitHubRepository): string {
+        return path.posix.join('https://api.github.com/repos/', repository.owner, repository.repo, 'releases');
+    }
+    async getReleases(repository: GitHubRepository): Promise<GitHubRelease[]> {
+        const response = await axios.default({method: 'GET', url: this.resolveGitHubRepositoryUrl(repository)});
         return response.data;
     }
 
-    async getLatestRelease(repository: string) {
+    async getLatestRelease(repository: GitHubRepository) {
         const releases = await this.getReleases(repository);
         return releases[0];
     }
 
     async downloadAsset(asset: GitHubAsset) {
-        const response = await axios.default({method: 'GET', url: `https://api.github.com/repos/DeadlyBossMods/DeadlyBossMods/releases/assets/${asset.id}`, responseType: 'arraybuffer', headers: {
+        const response = await axios.default({method: 'GET', url: asset.url, responseType: 'arraybuffer', headers: {
             'Accept': 'application/octet-stream'
         }});
         // convert the ArrayBuffer into a Buffer

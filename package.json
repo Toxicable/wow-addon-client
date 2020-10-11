@@ -1,25 +1,9 @@
 {
-  "name": "angular-electron",
-  "version": "8.0.5",
-  "description": "Angular 10 with Electron (Typescript + SASS + Hot Reload)",
-  "homepage": "https://github.com/maximegris/angular-electron",
+  "name": "wow-addon-client",
+  "version": "0.0.0",
   "author": {
-    "name": "Maxime GRIS",
-    "email": "maxime.gris@gmail.com"
+    "name": "Fabian Wiles"
   },
-  "keywords": [
-    "angular",
-    "angular 10",
-    "electron",
-    "nodejs",
-    "typescript",
-    "spectron",
-    "eslint",
-    "sass",
-    "windows",
-    "mac",
-    "linux"
-  ],
   "main": "main.js",
   "private": true,
   "scripts": {

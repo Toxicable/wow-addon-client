@@ -1,5 +1,5 @@
 {
-  "productName": "angular-electron",
+  "productName": "wow-addon-client",
   "directories": {
     "output": "release/"
   },

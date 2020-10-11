@@ -1,5 +1,6 @@
 <h2>Repositories</h2>
 
+Addon Dir: <input [formControl]="addonDir" />
 <div *ngFor="let repo of repos$ | async">
     {{repo.repo.repo}} - ({{repo.versions.length}} versions avilable) - <button (click)="installLatest(repo.repo)" >Install Latest!</button>
     <br />

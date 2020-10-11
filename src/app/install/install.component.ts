@@ -15,6 +15,7 @@ interface  Display {
     templateUrl: './install.component.html',
   })
 export class AddonInstallComponent {
+    addonDir = new FormControl('C:\\Program Files (x86)\\World of Warcraft\\_retail_\\Interface\\AddOns')
     gitHubRepository = new FormGroup({
         owner: new FormControl('DeadlyBossMods'),
         repo: new FormControl('DeadlyBossMods'),
@@ -38,7 +39,7 @@ export class AddonInstallComponent {
     async installLatest(repo: GitHubRepository) {
         const release = await this.github.getLatestRelease(repo);
         const zip = await this.github.downloadAsset(release.assets[0]);
-        this.installer.extractToDir(zip, 'C:\\Users\\fabia\\Downloads\\testaddondir')
+        this.installer.extractToDir(zip, this.addonDir.value);
     }
 
     async install() {
